@@ -1,7 +1,6 @@
 package eventer
 
 import com.github.mustachejava.DefaultMustacheFactory
-import com.sksamuel.hoplite.ConfigLoader
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -25,8 +24,8 @@ import java.util.*
 inline class SessionId(val id: String)
 
 fun Application.main() {
-    // cannot be passed as param because hot reloading doesn't support that
     val config = Config.load().eventer
+    val db = databaseModule(config.database)
 
     val sessionStore = mutableMapOf<SessionId, Login>()
 
