@@ -1,0 +1,30 @@
+{{> header }}
+<p>
+  {{#userName}}
+      Logged in as {{this}}. <a href="/logout">Logout…</a>
+  {{/userName}}
+  {{^userName}}
+      <a href="/login">Login…</a>
+  {{/userName}}
+</p>
+{{#status}}<div>{{this}}</div>{{/status}}
+<a href="/events/new">Create New Event</a>
+{{#events.size}}
+  <table>
+    <tr><td></td><th>Title</th><th>Host</th><th>Date</th><th>Guests</th><th>Description</th></tr>
+  {{#events}}
+    <tr>
+      <td><a href="/events/{{id}}">✎</a></td>
+      <td>{{title}}</td>
+      <td>{{host}}</td>
+      <td>{{dateTime}}</td>
+      <td>{{#guests}}{{name}} {{/guests}}</td>
+      <td>{{description}}</td>
+    </tr>
+  {{/events}}
+  </table>
+{{/events.size}}
+{{^events.size}}
+  <div>There are no Events.</caption>
+{{/events.size}}
+{{> footer }}
